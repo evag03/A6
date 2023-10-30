@@ -1,7 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.*; 
-import java.util.*; 
+import java.util.*;
 
 public class SpellDictionary implements SpellingOperations {
 
@@ -32,13 +32,7 @@ public class SpellDictionary implements SpellingOperations {
 
 // You will also provide a nearMisses method that will return an ArrayList of correctly spelled words that are exactly one edit away from a given incorrect word spelling. It will do this by constructing all possible near misses, checking them against the dictionary, and returning any that are real words, without duplicates.
 
-// Deletions
-// Delete one letter from the word. (n possibilities for a word of length n)
-// E.g.: catttle -> cattle
 
-// Insertions
-// Insert one letter into the word at any point. (26*(n+1) possibilities for a word of length n)
-// E.g.: catle -> cattle
 
 // Substitutions
 // Replace one character with another. (25*n possibilities for a word of length n)
@@ -53,31 +47,101 @@ public class SpellDictionary implements SpellingOperations {
 
     public ArrayList<String> nearMisses(String query) {
         ArrayList<String> possibleCorrections = new ArrayList<String>(); 
-        for (int i = 0; i < query.length(); i++) {
         //Deletions:
-          // Program indexes through word, looking at one letter at a time. For each letter of the word:
+        // Program indexes through word, looking at one letter at a time. For each letter of the word:
+        // E.g.: catttle -> cattle
+        for (int i = 0; i < query.length(); i++) {
+
           String[] separatedWord = query.split("");
           ArrayList<String> characters = new ArrayList<>(Arrays.asList(separatedWord));
           // Program removes letter
           characters.remove(i);
           
           String checkForThis = String.join("", characters);
-          System.out.println(checkForThis);
-          if (checkForThis.isListed(checkForThis)) {
-            possibleCorrections.add()
+          // System.out.println(checkForThis);
+          // Checks if word without letter matches a preexisting word in the dictionary of words
+          // If it does:
+          if (isListed(checkForThis)) {
+            // Add to possibleCorrections ArrayList
+            possibleCorrections.add(checkForThis);
           }
-            // Checks if word without letter matches a preexisting word in the dictionary of words
-            // If it does:
-                // Add to possibleCorrections ArraList
-                // Put removed letter back into word
-                // Continue indexing through word
-            // If it does not:
-                // Put removed letter back into word
-                //Continue indexing through word
+            // Continue indexing through word
+          // If it does not:
+            //Nothing happens; continue indexing through word
         }
 
+        System.out.println("Deletions test completed. Beginning Insertions test.");
+
+        // Insertions:
+        // Insert one letter into the word at any point. (26*(n+1) possibilities for a word of length n)
+        // E.g.: catle -> cattle
+        String alphabet = new String("abcdefghijklmnopqrstuvwxyz");
+        String[] separatedAlphabet = alphabet.split("");
+        ArrayList<String> alphabetList = new ArrayList<>(Arrays.asList(separatedAlphabet));
+
+        for (int i = 0; i < query.length(); i++) {
+          
+          //for each letter in the word, run through the entire alphabet and put one letter before and after each letter. we can use an iterator for this.
+          //(26*(n+1)) 
+          String[] separatedWord = query.split("");
+        
+          ArrayList<String> characters = new ArrayList<>(Arrays.asList(separatedWord));
+
+            // Iterates through each letter in alphabet Array
+            // Adds letter to beginning of word
+            // i.e 'a' + 'lpaca'
+            
+            // 'Outer loop will be a position, won't update until the end of the loop, so it could check for every letter within ' - Halie
+            // 'Maybe do Substitution first?' - Halie
+            // for (int j = 0; j < ) {
+            //   characters.add(alphabet[i]);
+            // }
+
+
+            if (isListed("uh")) {
+              // Add to possibleCorrections ArrayList
+              possibleCorrections.add("uhm");
+          }
+        }
+        
+          System.out.println("Insertions test completed. Beginning Substitutions test.");
+
+          // Substitutions
+          // Replace one character with another. (25*n possibilities for a word of length n)
+          // E.g.: caxtle -> cattle
+          for (int i = 0; i < query.length(); i++) {
+            //for each letter in the word, run through the entire alphabet and switch one letter with another.
+            //(26*(n+1)) 
+             String[] separatedWord = query.split("");
+             ArrayList<String> characters = new ArrayList<>(Arrays.asList(separatedWord));
+             
+             alphabet = new String("abcdefghijklmnopqrstuvwxyz");
+             separatedAlphabet = alphabet.split("");
+             alphabetList = new ArrayList<>(Arrays.asList(separatedAlphabet));
+             
+            for (int j = 0; j < alphabetList.size(); j++) {
+              characters.set(i, alphabetList.get(j));
+              String checkForThis = String.join("", characters);
+
+              if (isListed(checkForThis)) {
+                // Add to possibleCorrections ArrayList
+                possibleCorrections.add(checkForThis);
+              }
+
+              System.out.println(checkForThis);
+            }
+            
+          }
+          
+          System.out.println("Substitutions test completed. Beginning Transpositions test.");
+
         return possibleCorrections;
+
     }
+
+    
+
+
 
     
   public static void main(String[] args) {
@@ -101,7 +165,10 @@ public class SpellDictionary implements SpellingOperations {
     }
     file.close();
 
-    spellChecker.nearMisses("beeetle");
+    //spellChecker.nearMisses("beeetle");
+    String corrections = spellChecker.nearMisses("cax").toString();
+    System.out.println(corrections);
+
   }
 }  
 
