@@ -11,27 +11,27 @@ in your work, please indicate the status of each item
 
 Assignment Points:
 
-_____ 1 pt: Loads and stores dictionary
+___YES__ 1 pt: Loads and stores dictionary
 
-_____ 1 pt: Implements containsWord method as specified
+___YES__ 1 pt: Implements containsWord method as specified
 
-_____ 5 pts: Implements nearMisses method as specified, composed of:
+___YES__ 5 pts: Implements nearMisses method as specified, composed of:
 
-      _____ 1 pt: Suggests correct deletions
+      ___YES__ 1 pt: Suggests correct deletions
 
-      _____ 1 pt: Suggests correct insertions
+      ___YES__ 1 pt: Suggests correct insertions
 
-      _____ 1 pt: Suggests correct substitutions
+      ___YES__ 1 pt: Suggests correct substitutions
 
-      _____ 1 pt: Suggests correct transpositions
+      ___YES__ 1 pt: Suggests correct transpositions
 
-      _____ 1 pt: Suggests correct split words
+      ___YES__ 1 pt: Suggests correct split words
 
-_____ 1 pt: Main includes multiple tests for each point listed above
+___NO__ 1 pt: Main includes multiple tests for each point listed above
 
-_____ 1 pt: SpellChecker runs in command line mode as described
+___YES__ 1 pt: SpellChecker runs in command line mode as described
 
-_____ 1 pt: SpellChecker runs in file checking mode as described
+___NO__ 1 pt: SpellChecker runs in file checking mode as described
 
 (Note that in addition to the tests that you write, we will perform automated testing of our own on your submitted code.)
 

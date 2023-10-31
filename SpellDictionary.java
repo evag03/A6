@@ -5,7 +5,7 @@ import java.util.*;
 
 public class SpellDictionary implements SpellingOperations {
 
-    private HashSet<String> dictionary;
+    public HashSet<String> dictionary;
 
 
     public SpellDictionary() {
@@ -51,7 +51,6 @@ public class SpellDictionary implements SpellingOperations {
           characters.remove(i);
           
           String checkForThis = String.join("", characters);
-          // System.out.println(checkForThis);
           // Checks if word without letter matches a preexisting word in the dictionary of words
           // If it does:
           if (isListed(checkForThis)) {
@@ -63,7 +62,7 @@ public class SpellDictionary implements SpellingOperations {
             //Nothing happens; continue indexing through word
         }
 
-        System.out.println("Deletions test completed. Beginning Insertions test.");
+
 
         // Insertions:
         // Insert one letter into the word at any point. (26*(n+1) possibilities for a word of length n)
@@ -113,11 +112,13 @@ public class SpellDictionary implements SpellingOperations {
             // }
           }
         }
-          System.out.println("Insertions test completed. Beginning Substitutions test.");
 
+
+        
           // Substitutions
           // Replace one character with another. (25*n possibilities for a word of length n)
           // E.g.: caxtle -> cattle
+
           for (int i = 0; i < query.length(); i++) {
              String[] separatedWord = query.split("");
              ArrayList<String> characters = new ArrayList<>(Arrays.asList(separatedWord));
@@ -138,11 +139,11 @@ public class SpellDictionary implements SpellingOperations {
             }
             
           }
-          System.out.println("Substitutions test completed. Beginning Transpositions test.");
 
           // Transpositions
           // Swap two adjacent characters. (n-1 possibilities for a word of length n)
           // E.g.: cattel -> cattle
+
           for (int i = 0; i < query.length() - 1; i++) {
             String[] separatedWord = query.split("");
             ArrayList<String> characters = new ArrayList<>(Arrays.asList(separatedWord));
@@ -152,7 +153,6 @@ public class SpellDictionary implements SpellingOperations {
             characters.set(i+1, replaceWithThis);
 
             String checkForThis = String.join("", characters);
-            System.out.println(checkForThis);
 
             if (isListed(checkForThis)) {
                 // Add to possibleCorrections ArrayList
@@ -162,15 +162,14 @@ public class SpellDictionary implements SpellingOperations {
             
 
           }
-          System.out.println("Transpostion test completed. Beginning Splits test.");
 
           // Splits
           // Divide the word into two legal words. (n-1 possibilities for a word of length n) -- for this kind of near miss, the pair of words together should be recorded as a single entry, with a space between them. E.g.: cattell -> cat tell
+          
           for (int i = 0; i < query.length() - 1; i++) {
            String firstPossibleWord = query.substring(0, i+1);
            String secondPossibleWord = query.substring(i+1, query.length());
            
-           System.out.println(firstPossibleWord + " " + secondPossibleWord);
            if (isListed(firstPossibleWord) && isListed(secondPossibleWord)) {
               possibleCorrections.add(firstPossibleWord + " " + secondPossibleWord);
            }
@@ -179,7 +178,6 @@ public class SpellDictionary implements SpellingOperations {
 
 
         return possibleCorrections;
-
     }
 
     
