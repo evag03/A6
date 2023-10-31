@@ -38,13 +38,6 @@ public class SpellDictionary implements SpellingOperations {
 // Replace one character with another. (25*n possibilities for a word of length n)
 // E.g.: caxtle -> cattle
 
-// Transpositions
-// Swap two adjacent characters. (n-1 possibilities for a word of length n)
-// E.g.: cattel -> cattle
-
-// Splits
-// Divide the word into two legal words. (n-1 possibilities for a word of length n) -- for this kind of near miss, the pair of words together should be recorded as a single entry, with a space between them. E.g.: cattell -> cat tell
-
     public ArrayList<String> nearMisses(String query) {
         ArrayList<String> possibleCorrections = new ArrayList<String>(); 
         //Deletions:
@@ -79,13 +72,35 @@ public class SpellDictionary implements SpellingOperations {
         String[] separatedAlphabet = alphabet.split("");
         ArrayList<String> alphabetList = new ArrayList<>(Arrays.asList(separatedAlphabet));
 
-        for (int i = 0; i < query.length(); i++) {
+        for (int i = 0; i <= query.length(); i++) {
           
           //for each letter in the word, run through the entire alphabet and put one letter before and after each letter. we can use an iterator for this.
           //(26*(n+1)) 
           String[] separatedWord = query.split("");
         
           ArrayList<String> characters = new ArrayList<>(Arrays.asList(separatedWord));
+
+          for (int j = 0; j < alphabetList.size(); j++) {
+
+            characters.add(i, alphabetList.get(j));
+            String checkForThis = String.join("", characters);
+            
+            if (isListed(checkForThis)) {
+              // Add to possibleCorrections ArrayList
+              possibleCorrections.add(checkForThis);
+            }
+            characters.remove(i);
+
+            // characters.add(i+1, alphabetList.get(j));
+            // checkForThis = String.join("", characters);
+
+
+            // System.out.println(checkForThis);
+            // if (isListed(checkForThis)) {
+            //   // Add to possibleCorrections ArrayList
+            //   possibleCorrections.add(checkForThis);
+            // }
+            // characters.remove(i);
 
             // Iterates through each letter in alphabet Array
             // Adds letter to beginning of word
@@ -96,22 +111,14 @@ public class SpellDictionary implements SpellingOperations {
             // for (int j = 0; j < ) {
             //   characters.add(alphabet[i]);
             // }
-
-
-            if (isListed("uh")) {
-              // Add to possibleCorrections ArrayList
-              possibleCorrections.add("uhm");
           }
         }
-        
           System.out.println("Insertions test completed. Beginning Substitutions test.");
 
           // Substitutions
           // Replace one character with another. (25*n possibilities for a word of length n)
           // E.g.: caxtle -> cattle
           for (int i = 0; i < query.length(); i++) {
-            //for each letter in the word, run through the entire alphabet and switch one letter with another.
-            //(26*(n+1)) 
              String[] separatedWord = query.split("");
              ArrayList<String> characters = new ArrayList<>(Arrays.asList(separatedWord));
              
@@ -128,12 +135,48 @@ public class SpellDictionary implements SpellingOperations {
                 possibleCorrections.add(checkForThis);
               }
 
-              System.out.println(checkForThis);
             }
             
           }
-          
           System.out.println("Substitutions test completed. Beginning Transpositions test.");
+
+          // Transpositions
+          // Swap two adjacent characters. (n-1 possibilities for a word of length n)
+          // E.g.: cattel -> cattle
+          for (int i = 0; i < query.length() - 1; i++) {
+            String[] separatedWord = query.split("");
+            ArrayList<String> characters = new ArrayList<>(Arrays.asList(separatedWord));
+
+            String replaceWithThis = characters.get(i);
+            characters.set(i, characters.get(i+1));
+            characters.set(i+1, replaceWithThis);
+
+            String checkForThis = String.join("", characters);
+            System.out.println(checkForThis);
+
+            if (isListed(checkForThis)) {
+                // Add to possibleCorrections ArrayList
+                possibleCorrections.add(checkForThis);
+            }
+
+            
+
+          }
+          System.out.println("Transpostion test completed. Beginning Splits test.");
+
+          // Splits
+          // Divide the word into two legal words. (n-1 possibilities for a word of length n) -- for this kind of near miss, the pair of words together should be recorded as a single entry, with a space between them. E.g.: cattell -> cat tell
+          for (int i = 0; i < query.length() - 1; i++) {
+           String firstPossibleWord = query.substring(0, i+1);
+           String secondPossibleWord = query.substring(i+1, query.length());
+           
+           System.out.println(firstPossibleWord + " " + secondPossibleWord);
+           if (isListed(firstPossibleWord) && isListed(secondPossibleWord)) {
+              possibleCorrections.add(firstPossibleWord + " " + secondPossibleWord);
+           }
+                
+          }
+
 
         return possibleCorrections;
 
@@ -166,7 +209,7 @@ public class SpellDictionary implements SpellingOperations {
     file.close();
 
     //spellChecker.nearMisses("beeetle");
-    String corrections = spellChecker.nearMisses("cax").toString();
+    String corrections = spellChecker.nearMisses("shutup").toString();
     System.out.println(corrections);
 
   }
