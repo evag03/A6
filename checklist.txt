@@ -27,39 +27,39 @@ ___YES__ 5 pts: Implements nearMisses method as specified, composed of:
 
       ___YES__ 1 pt: Suggests correct split words
 
-___NO__ 1 pt: Main includes multiple tests for each point listed above
+___YES__ 1 pt: Main includes multiple tests for each point listed above
 
 ___YES__ 1 pt: SpellChecker runs in command line mode as described
 
-___NO__ 1 pt: SpellChecker runs in file checking mode as described
+___YES__ 1 pt: SpellChecker runs in file checking mode as described
 
 (Note that in addition to the tests that you write, we will perform automated testing of our own on your submitted code.)
 
 
 Kudos / Phase Three:
 
-_____ (Kudos!) Timing experiments completed & described in readme
+___NO__ (Kudos!) Timing experiments completed & described in readme
 
 
 
 ## General Items:
 
-_____ 4 pts: Programs compile without errors or warnings
+___YES__ 4 pts: Programs compile without errors or warnings
 
-_____ 2 pts: Executes fully & consistently without crashing (exception/freeze)
+___YES__ 2 pts: Executes fully & consistently without crashing (exception/freeze)
 
-_____ 2 pt: Complies with style guidelines (missing items 1 pt each):
+___YES__ 2 pt: Complies with style guidelines (missing items 1 pt each):
 
-      _____ Classes & class members all have Javadoc header comments
+      ___YES__ Classes & class members all have Javadoc header comments
 
-      _____ Clear and consistent indentation of bracketed sections
+      ___YES__ Clear and consistent indentation of bracketed sections
 
-      _____ Adheres to Java conventions on naming & capitalization
+      ___YES__ Adheres to Java conventions on naming & capitalization
 
-      _____ Methods & variables all have clear and accurate names
+      __YES__ Methods & variables all have clear and accurate names
 
-      _____ Methods avoid confusing side effects
+      ___YES__ Methods avoid confusing side effects
 
-_____ 1 pt: All required files included with submission (including completed checklist file)
+___YES__ 1 pt: All required files included with submission (including completed checklist file)
 
-_____ 1 pt: readme.md contains your reflection on the assignment
+___YES__ 1 pt: readme.md contains your reflection on the assignment
